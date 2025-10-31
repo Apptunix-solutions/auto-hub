@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Link } from "react-router-dom";
 
 interface Vehicle {
   id: string;
@@ -122,48 +123,56 @@ const Vehicles = () => {
           {vehicles.map((vehicle) => {
             const status = getServiceStatus(vehicle.nextService);
             return (
-              <Card key={vehicle.id} className="hover:shadow-lg transition-smooth border-2 hover:border-accent/50">
-                <CardHeader>
+              <Card 
+                key={vehicle.id} 
+                className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-accent/50 hover:-translate-y-1 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-5 transition-opacity" />
+                <CardHeader className="relative">
                   <div className="flex items-start justify-between">
-                    <div className="bg-gradient-primary p-3 rounded-lg">
+                    <div className="bg-gradient-primary p-3 rounded-lg shadow-lg group-hover:scale-110 transition-transform">
                       <Car className="h-6 w-6 text-primary-foreground" />
                     </div>
-                    <Badge variant={status.variant}>{status.label}</Badge>
+                    <Badge variant={status.variant} className="shadow-sm">{status.label}</Badge>
                   </div>
-                  <CardTitle className="text-2xl mt-4">
+                  <CardTitle className="text-2xl mt-4 group-hover:text-primary transition-colors">
                     {vehicle.year} {vehicle.make} {vehicle.model}
                   </CardTitle>
-                  <CardDescription>License: {vehicle.licensePlate}</CardDescription>
+                  <CardDescription className="font-semibold">License: {vehicle.licensePlate}</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
+                <CardContent className="space-y-4 relative">
+                  <div className="space-y-3 text-sm bg-secondary/30 p-4 rounded-lg">
+                    <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">VIN:</span>
-                      <span className="font-mono">{vehicle.vin.slice(-8)}</span>
+                      <span className="font-mono font-semibold">{vehicle.vin.slice(-8)}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span className="text-muted-foreground">Mileage:</span>
-                      <span className="font-semibold">{vehicle.mileage.toLocaleString()} mi</span>
+                      <span className="font-bold text-primary">{vehicle.mileage.toLocaleString()} mi</span>
                     </div>
                     {vehicle.nextService && (
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <span className="text-muted-foreground">Next Service:</span>
-                        <span className="font-semibold">
+                        <span className="font-semibold text-accent">
                           {vehicle.nextService.toLocaleDateString()}
                         </span>
                       </div>
                     )}
                   </div>
                   
-                  <div className="flex gap-2 pt-4 border-t">
-                    <Button variant="outline" className="flex-1 gap-2">
-                      <Calendar className="h-4 w-4" />
-                      Book
-                    </Button>
-                    <Button variant="outline" className="flex-1 gap-2">
-                      <Wrench className="h-4 w-4" />
-                      History
-                    </Button>
+                  <div className="flex gap-2 pt-2">
+                    <Link to="/bookings" className="flex-1">
+                      <Button variant="default" className="w-full gap-2 group-hover:shadow-md">
+                        <Calendar className="h-4 w-4" />
+                        Book
+                      </Button>
+                    </Link>
+                    <Link to="/services" className="flex-1">
+                      <Button variant="outline" className="w-full gap-2">
+                        <Wrench className="h-4 w-4" />
+                        History
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

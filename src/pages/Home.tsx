@@ -3,6 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowRight, Car, Wrench, Calendar, Shield, Clock, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-bg.jpg";
+import Testimonials from "@/components/home/Testimonials";
+import Pricing from "@/components/home/Pricing";
+import FAQ from "@/components/home/FAQ";
 
 const Home = () => {
   const features = [
@@ -128,9 +131,19 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* Pricing */}
+      <Pricing />
+
+      {/* FAQ */}
+      <FAQ />
+
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-20 bg-gradient-hero relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE2YzAtMTEuMDUtOC45NS0yMC0yMC0yMFMtNCAxLjk1LTQgMTNzOC45NSAxNiAyMCAxNiAyMC00Ljk1IDIwLTE2em0wIDBjMC0xMS4wNSA4Ljk1LTIwIDIwLTIwczIwIDguOTUgMjAgMjAtOC45NSAxNi0yMCAxNi0yMC00Ljk1LTIwLTE2eiIvPjwvZz48L2c+PC9zdmc+')] opacity-10" />
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl font-bold text-primary-foreground mb-6">
             Ready to Get Started?
           </h2>
@@ -138,7 +151,7 @@ const Home = () => {
             Join thousands of satisfied customers who trust AutoCare Pro for their vehicle maintenance
           </p>
           <Link to="/bookings">
-            <Button size="lg" variant="accent" className="gap-2">
+            <Button size="lg" variant="accent" className="gap-2 shadow-lg hover:shadow-xl">
               Schedule Your First Service
               <ArrowRight className="h-5 w-5" />
             </Button>
